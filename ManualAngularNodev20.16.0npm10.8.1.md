@@ -1,33 +1,37 @@
-comandos para las versiones:
+# Manual Angular 2024
 
-Prado@DESKTOP-72MFJHI MINGW64 ~/Desktop/Angular/Angular (main)
+## Instalación de CLI angular https://v17.angular.io/cli
+* comandos para las versiones:
+~~~
 $ node -v
 v20.16.0
+~~~
 
-Prado@DESKTOP-72MFJHI MINGW64 ~/Desktop/Angular/Angular (main)
+~~~
 $ npm -v
 10.8.1
-
-verificar - instalar CLI (Intefaz de Linea de Comandos)
+~~~
+* verificar - instalar CLI (Intefaz de Linea de Comandos) 
+~~~
 $ ng --help
 bash: ng: command not found
+~~~
 
+~~~
 $ npm install -g @angular/cli@17
 npm warn deprecated read-package-json@7.0.1: This package is no longer supported. Please use @npmcli/package-json instead.
 
 changed 240 packages in 5m
+~~~
 
-44 packages are looking for funding
-  run `npm fund` for details
-instalacion verificada
-$ ng --help
-ng <command>
+~~~
+~~~
 
-Commands:
-  ng add <collection>            Adds support for an external library to your project.
-  ng analytics                   Configures the gathering of Angular CLI usage metrics.
-  ng build [project]             Compiles an Angular application or library into an output directory named dist/ at the given output
-                                 path. 
+
+
+
+
+
 
 $ ng new --help
 ng new [name]
