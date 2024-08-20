@@ -85,3 +85,42 @@ CREATE primerProyectoAngular/src/app/app.config.server.ts (361 bytes)
 CREATE primerProyectoAngular/src/assets/.gitkeep (0 bytes)
 ✔ Packages installed successfully.
     Directory is already under version control. Skipping initialization of git.
+
+
+
+Entrar al proyecto
+Prado@DESKTOP-72MFJHI MINGW64 ~/Desktop/Angular/Angular (main)
+$ cd primerProyectoAngular/
+
+iniciar servidor
+Prado@DESKTOP-72MFJHI MINGW64 ~/Desktop/Angular/Angular/primerProyectoAngular (main)
+$ ng serve -o
+⠋ Building...
+
+Prado@DESKTOP-72MFJHI MINGW64 ~/Desktop/Angular/Angular/primerProyectoAngular (main)
+$ ng serve
+Browser bundles
+Initial chunk files     | Names               |  Raw size
+polyfills.js            | polyfills           |  88.12 kB |
+main.js                 | main                |  22.08 kB |
+styles.css              | styles              |  95 bytes |
+
+                        | Initial total       | 110.29 kB
+
+
+Server bundles
+Initial chunk files     | Names               |  Raw size
+chunk-4XRH2YV3.mjs      | -                   |   1.70 MB |
+polyfills.server.mjs    | polyfills.server    | 559.52 kB |
+main.server.mjs         | main.server         | 216.23 kB |
+chunk-VPSODEBW.mjs      | -                   |   2.51 kB |
+render-utils.server.mjs | render-utils.server | 423 bytes |
+
+Lazy chunk files        | Names               |  Raw size
+chunk-OTT6LQ5K.mjs      | xhr2                |  39.10 kB |
+
+Application bundle generation complete. [57.592 seconds]
+
+Watch mode enabled. Watching for file changes...
+  ➜  Local:   http://localhost:4200/
+  ➜  press h + enter to show help
