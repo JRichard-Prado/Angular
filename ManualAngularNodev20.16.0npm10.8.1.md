@@ -110,3 +110,17 @@ CREATE src/app/home/home.component.css (0 bytes)
 1. Abrir `app.component.tsen` el editor.
 
 2. En `app.component.ts`, importe HomeComponentagregando esta línea a las importaciones a nivel de archivo.
+
+~~~ javascript
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+
+~~~
+3. En `app.component.ts`, en , actualice la propiedad de la matriz y agregue `.@Component imports HomeComponent`
+~~~ javascript
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet , HomeComponent, ContadorComponent], ......
+~~~
