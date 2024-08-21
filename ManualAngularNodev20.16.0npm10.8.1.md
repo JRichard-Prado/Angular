@@ -118,6 +118,7 @@ import { HomeComponent } from './home/home.component';
 
 ~~~
 ![nuevo componente](image.png)
+
 3. En `app.component.ts`, en , actualice la propiedad de la matriz y agregue `.@Component imports HomeComponent`
 ~~~ javascript
 @Component({
