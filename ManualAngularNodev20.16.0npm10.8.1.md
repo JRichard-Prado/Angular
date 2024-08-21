@@ -80,4 +80,33 @@ Watch mode enabled. Watching for file changes...
   ➜  Local:   http://localhost:4200/
   ➜  press h + enter to show help
 
-## Lección 1: Hola mundo
+## Lección 1:  [Hola mundo](https://v17.angular.io/tutorial/first-app/first-app-lesson-01)
+
+En el panel Terminal de su IDE:
+
+1. navegue hasta el first-appdirectorio 
+2. instalar las dependencias
+
+
+
+## Lección 2: Crear componente Inicio
+
+* `selector`: para describir cómo Angular se refiere al componente en las plantillas.
+* `standalone`: para describir si el componente requiere un archivo NgModule.
+* `imports`: para describir las dependencias del componente.
+* `template`: para describir el marcado y diseño HTML del componente.
+* `styleUrls`: para enumerar las URL de los archivos CSS que utiliza el componente en una matriz
+## Paso 1: crea elHomeComponent
+Ejecute este comando `ng generate component home --inline-template --skip-tests` y compilar con `ng serve`
+~~~ bash
+Prado@DESKTOP-72MFJHI MINGW64 ~/Desktop/Angular/Angular-Inicial (master)
+$ ng generate component home --inline-template --skip-tests
+CREATE src/app/home/home.component.ts (256 bytes)
+CREATE src/app/home/home.component.css (0 bytes)
+~~~
+## Paso 2: agregue el nuevo componente al diseño de su aplicación
+
+
+1. Abrir `app.component.tsen` el editor.
+
+2. En `app.component.ts`, importe HomeComponentagregando esta línea a las importaciones a nivel de archivo.
