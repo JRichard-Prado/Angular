@@ -12,18 +12,29 @@ $ npm -v
 10.8.1
 ~~~
 * verificar - instalar CLI (Intefaz de Linea de Comandos) 
+
 ~~~
-$ ng --help
-bash: ng: command not found
+$ ng version
+
+     _                      _                 ____ _     ___
+    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+ /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                |___/
+    
+
+Angular CLI: 17.3.8
+Node: 20.16.0
+Package Manager: npm 10.8.1
+OS: win32 x64
 ~~~
 
+**instalar una version actualizada y una  especifica**
 ~~~
 $ npm install -g @angular/cli@17
-npm warn deprecated read-package-json@7.0.1: This package is no longer supported. Please use @npmcli/package-json instead.
-
-changed 240 packages in 5m
 ~~~
-
+* ver todas las opciones para crear un proyecto
 ~~~
 $ ng new --help
 ~~~
@@ -32,33 +43,6 @@ $ ng new --help
 ~~~
 $ ng new primerProyectoAngular
 ~~~
-? Would you like to enable autocompletion? This will set up your terminal so pressing TAB while typing Angular CLI commands will show
-
-? Would you like to enable autocompletion? This will set up your terminal so pressing TAB while typing Angular CLI commands will show
-
-? Would you like to enable autocompletion? This will set up your terminal so pressing TAB while typing Angular CLI commands will show
-
- possible options and autocomplete arguments. (Enabling autocompletion will modify configuration files in your home directory.) Yes
-Appended `source <(ng completion script)` to `C:\Users\Prado\.bashrc`. Restart your terminal or run the following to autocomplete `ng
-` commands:
-
-    source <(ng completion script)
-? Would you like to share pseudonymous usage data about this project with the Angular Team
-at Google under Google's Privacy Policy at https://policies.google.com/privacy. For more
-details and how to change this setting, see https://angular.io/analytics. No
-Global setting: disabled
-Local setting: No local workspace configuration file.
-Effective status: disabled
-? Which stylesheet format would you like to use? CSS             [ https://developer.mozilla.org/docs/Web/CSS                     ]
-? Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? Yes
-...
-
-CREATE primerProyectoAngular/src/app/app.config.server.ts (361 bytes)
-CREATE primerProyectoAngular/src/assets/.gitkeep (0 bytes)
-✔ Packages installed successfully.
-    Directory is already under version control. Skipping initialization of git.
-
-
 
 ## Entrar al proyecto
 * ingresar al directorio del proyecto
@@ -69,16 +53,14 @@ $ cd primerProyectoAngular/
 
 * Iniciar servidor ingresar al enlace
 ~~~
-Prado@DESKTOP-72MFJHI MINGW64 ~/Desktop/Angular/Angular/primerProyectoAngular (main)
 $ ng serve -o
 ⠋ Building...
-~~~
-
-Application bundle generation complete. [57.592 seconds]
-
 Watch mode enabled. Watching for file changes...
   ➜  Local:   http://localhost:4200/
   ➜  press h + enter to show help
+~~~
+
+
 
 ## Lección 1:  [Hola mundo](https://v17.angular.io/tutorial/first-app/first-app-lesson-01)
 
@@ -89,27 +71,51 @@ En el panel Terminal de su IDE:
 
 
 
-## Lección 2: Crear componente Inicio
+## Lección 2: Crear componente Inicio  
 
 * `selector`: para describir cómo Angular se refiere al componente en las plantillas.
 * `standalone`: para describir si el componente requiere un archivo NgModule.
 * `imports`: para describir las dependencias del componente.
 * `template`: para describir el marcado y diseño HTML del componente.
 * `styleUrls`: para enumerar las URL de los archivos CSS que utiliza el componente en una matriz
-## Paso 1: crea elHomeComponent
-Ejecute este comando `ng generate component home --inline-template --skip-tests` y compilar con `ng serve`
+### Paso 1: Crea el HomeComponent , Usar Angular CLI para crear un componente:
+- Ejecute este comando `ng generate component home --inline-template --skip-tests` y compilar con `ng serve`
 ~~~ bash
-Prado@DESKTOP-72MFJHI MINGW64 ~/Desktop/Angular/Angular-Inicial (master)
-$ ng generate component home --inline-template --skip-tests
+$ ng generate component HomeComponent --inline-template --skip-tests
 CREATE src/app/home/home.component.ts (256 bytes)
-CREATE src/app/home/home.component.css (0 bytes)
+...
+~~~~
+- otra forma de generar componente 
+~~~ javascript
+$ ng g c homeComponent
+CREATE src/app/home-component/home-component.component.html (30 bytes)
+CREATE src/app/home-component/home-component.component.spec.ts (669 bytes)
+CREATE src/app/home-component/home-component.component.ts (277 bytes)
+CREATE src/app/home-component/home-component.component.css (0 bytes)
 ~~~
+### Eliminar un componente `ng g c demoComponent.`
+
+    Crea una carpeta demoComponent.
+    Genera archivos html, css, ts y  spec.
+    También agrega una dependencia dentro del archivo app.module.ts para añadir ese componente a su proyecto.
+
+- entonces hazlo en orden inverso
+
+        Eliminar la dependencia de app.module.ts
+        Eliminar esa carpeta de componente.
+
+- al eliminar la dependencia tienes que hacer dos cosas.
+
+        Eliminar la línea de importación del archivo app.module.ts.
+        Eliminar la declaración del componente del array de declaraciones @NgModule en app.module.ts.
+
+
 ## Paso 2: agregue el nuevo componente al diseño de su aplicación
 
 
-1. Abrir `app.component.tsen` el editor.
+1. Abrir `app.component.ts` en el editor.
 
-2. En `app.component.ts`, importe HomeComponentagregando esta línea a las importaciones a nivel de archivo.
+2. En `app.component.ts`, importe HomeComponent agregando esta línea a las importaciones a nivel de archivo.
 
 ~~~ javascript
 import { Component } from '@angular/core';
@@ -117,7 +123,7 @@ import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 ~~~
-![nuevo componente](image.png)
+
 
 3. En `app.component.ts`, en , actualice la propiedad de la matriz y agregue `.@Component imports HomeComponent`
 ~~~ javascript
@@ -126,3 +132,26 @@ import { HomeComponent } from './home/home.component';
   standalone: true,
   imports: [RouterOutlet , HomeComponent, ContadorComponent], ......
 ~~~
+4. Editar `app.component.html` 
+~~~ html
+<h1>Hola Angular </h1>
+<section class="content">
+    <app-home></app-home>
+    <app-contador></app-contador>
+  </section>
+~~~
+##  Interpolacion
+1. Sintaxis básica solo se puede hacer la llamada dentro de la vista del componente TypeScript
+~~~ html
+<p>{{ mensaje }}</p>
+~~~
+Supongamos que tienes un componente en Angular con la siguiente clase:
+~~~ js
+    export class EjemploComponent {
+    titulo: string = 'Bienvenidos a Angular';
+    descripcion: string = 'Este es un ejemplo de interpolación.';
+    visitas: number = 42;
+    }
+~~~
+`{{ titulo }}`: Muestra el valor de la propiedad titulo del componente. En este caso, sería "Bienvenidos a Angular".
+
