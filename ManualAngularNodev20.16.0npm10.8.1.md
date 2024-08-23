@@ -155,3 +155,58 @@ Supongamos que tienes un componente en Angular con la siguiente clase:
 ~~~
 `{{ titulo }}`: Muestra el valor de la propiedad titulo del componente. En este caso, sería "Bienvenidos a Angular".
 
+## Event Binding o enlace de evento
+Dentro de este componente, vamos a configurar el event binding
+### HTML (contador.component.html)
+~~~ html
+<button (click)="mostrarMensaje()">Haz clic aquí</button>
+<button (click)="contador=contador-1">-</button>
+<span>{{contador}}</span>
+<button (click)="contador = contador+1">+</button>
+~~~
+### TypeScript (ejemplo-event-binding.component.ts)
+~~~ js
+export class ContadorComponent {
+contador = 8;
+decremento (){
+  this.contador = this.contador - 2;
+}
+incremento (){
+  this.contador += 2;
+}
+~~~
+En la vista de app.component.html agregar la etiqueta
+~~~ html
+ <app-contador></app-contador>
+~~~
+## Class Binding o enlace de clases
+- Crear un nuevo componente
+~~~ bash
+$ ng g c botones
+CREATE src/app/botones/botones.component.html (23 bytes)
+CREATE src/app/botones/botones.component.spec.ts (626 bytes)
+CREATE src/app/botones/botones.component.ts (250 bytes)
+CREATE src/app/botones/botones.component.css (0 bytes)
+~~~
+-  `botones.component.html`
+~~~ html
+<div>
+    <button class="btn btn-danger">color rojo</button>
+    <button class="btn btn-success mx-2">color azul</button>
+    <button class="btn btn-primary">verde</button>
+</div>
+~~~
+- 
+~~~ js
+import { BotonesComponent } from './botones/botones.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet , HomeComponent, ContadorComponent,BotonesComponent],
+  ...
+~~~
+Utilizamos la etiqueta nueva en la vista de `app.component.html`
+~~~ html
+    <app-botones></app-botones>
+~~~
