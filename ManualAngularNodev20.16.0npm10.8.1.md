@@ -180,7 +180,7 @@ En la vista de app.component.html agregar la etiqueta
  <app-contador></app-contador>
 ~~~
 ## Class Binding o enlace de clases
-- Crear un nuevo componente
+1. Crear un nuevo componente primera forma de uso
 ~~~ bash
 $ ng g c botones
 CREATE src/app/botones/botones.component.html (23 bytes)
@@ -188,15 +188,17 @@ CREATE src/app/botones/botones.component.spec.ts (626 bytes)
 CREATE src/app/botones/botones.component.ts (250 bytes)
 CREATE src/app/botones/botones.component.css (0 bytes)
 ~~~
--  `botones.component.html`
+- Ejemplo click en boton cambia el color a parrafo `botones.component.html`
 ~~~ html
 <div>
     <button class="btn btn-danger">color rojo</button>
     <button class="btn btn-success mx-2">color azul</button>
     <button class="btn btn-primary">verde</button>
 </div>
+<p [class]="text_color">texto cambia de color</p>
+
 ~~~
-- 
+- Importar las dependencias y crear la propiedad en `app.component.ts`
 ~~~ js
 import { BotonesComponent } from './botones/botones.component';
 
@@ -206,7 +208,50 @@ import { BotonesComponent } from './botones/botones.component';
   imports: [RouterOutlet , HomeComponent, ContadorComponent,BotonesComponent],
   ...
 ~~~
-Utilizamos la etiqueta nueva en la vista de `app.component.html`
+~~~ js
+export class BotonesComponent {
+  text_color: string = '';
+}
+~~~
+
+- Utilizamos la etiqueta nueva en la vista de `app.component.html`
 ~~~ html
     <app-botones></app-botones>
+~~~
+2. ejemplo activar/desactivar botones en `botones.component.html` 
+~~~ html
+<div>
+    <button [disabled]="button_disable" class="btn btn-danger" (click)="text_color = 'text-danger'">color rojo</button>
+    <button [disabled]="button_disable" class="btn btn-success mx-2" (click)="text_color = 'text-success '">color azul</button>
+    <button [disabled]="button_disable" class="btn btn-primary" (click)="text_color = 'text-primary'">verde</button>
+
+</div>
+<p [class]="text_color">texto cambia de color</p>
+<button class="btn btn-danger" (click)="button_disable = !button_disable" >Activar/Desactivar</button>
+~~~
+- Crear una propiedad button_disable en `botones.component.ts`
+~~~ js
+export class BotonesComponent {
+  text_color: string = '';
+  button_disable:boolean = false;
+}
+~~~
+3. asignar mas de una class 
+~~~ html
+ <button [class]="{
+        'disabled': button_disable,
+        'btn': true
+
+    }" class="btn btn-danger" (click)="text_color = 'text-danger'">color rojo</button>
+    <button  [class]="{
+        'disabled': button_disable,
+        'btn': true
+
+    }"  class="btn btn-success mx-2" (click)="text_color = 'text-success '">color azul</button>
+    <button  [class]="{
+        'disabled': button_disable,
+        'btn': true
+
+    }"  class="btn btn-primary" (click)="text_color = 'text-primary'">verde</button>
+
 ~~~
