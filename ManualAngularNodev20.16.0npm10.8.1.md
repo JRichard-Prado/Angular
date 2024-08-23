@@ -251,7 +251,123 @@ export class BotonesComponent {
     <button  [class]="{
         'disabled': button_disable,
         'btn': true
+~~~
+## Property Binding o enlaces de propiedades
+- ejemplo de cambiar imagenes con dos botones, editar `boton.component.html`
+~~~ html
+<div><button  class="btn btn-danger" (click)="imagen= 'https://images.pexels.com/photos/19641063/pexels-photo-19641063/free-photo-of-cielo-puesta-de-sol-hombre-pareja.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'">imagen 1</button>
+    <button class="btn btn-primary" (click)="imagen = 'https://images.pexels.com/photos/20608901/pexels-photo-20608901/free-photo-of-carretera-puesta-de-sol-pueblo-edificios.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'">imagen 2</button>
+    </div>
+<img [src]="imagen" alt="">
+~~~
+- crear una propiedad imagen en `boton.component.ts`
+~~~ js
+export class BotonesComponent {
+  imagen: string = 'https://images.pexels.com/photos/19641063/pexels-photo-19641063/free-photo-of-cielo-puesta-de-sol-hombre-pareja.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load';
+}
+~~~
+## Variables de plantilla (template variables) en formularios
+- crear un nuevo componente formularios e importar dependencias
+~~~ bash
+$ ng g c formularios
+CREATE src/app/formularios/formularios.component.html (27 bytes)
+CREATE src/app/formularios/formularios.component.spec.ts (654 bytes)
+CREATE src/app/formularios/formularios.component.ts (266 bytes)
+CREATE src/app/formularios/formularios.component.css (0 bytes)
+~~~
+~~~ js
+import { FormulariosComponent } from './formularios/formularios.component';
 
-    }"  class="btn btn-primary" (click)="text_color = 'text-primary'">verde</button>
+@Component({
+selector: 'app-root',
+standalone: true,
+imports: [RouterOutlet , HomeComponent, ContadorComponent,BotonesComponent,FormulariosComponent],
+~~~
+1. Ejemplo **formulario simple** dos etiquetas input con nombre y salida en consola, dentro de `formularios.component.html`
+~~~ html
+<input type="text" placeholder="ingresa usuario" #usuario>
+<input type="text" placeholder="ingresa tu nombre" class="form-control" #nombre>
+<button class="btn btn-primary mx -2" (click)="mostrar_en_consola(usuario.value ,nombre.value)">mostrar en consola</button>
+~~~
+- en `formularios.component.ts` crear metodo con dos parametros de entrada
+~~~ js
+export class FormulariosComponent {
+  mostrar_en_consola ( User: string, name: string){
+    console.log('hola mundo');
+    console.log(User);
+    console.log(name);
+  }
+~~~
+### Directiva ngIf / Else en formularios
+1. importar en el type script `formulario.componente.ts` 
+~~~js
+import { CommonModule } from '@angular/common';
 
+@Component({
+  selector: 'app-formularios',
+  standalone: true,
+  imports: [CommonModule],
+  ...
+~~~
+2. ejemplo mostrar un alert desde un boton mediante ngIf esta directiva elimina el elemento de DOM
+~~~html
+<div class="alert alert-danger" *ngIf="mostrarMensaje; else elseTemplate">
+    <p>El mensaje está visible.</p>
+  </div>
+  
+  <ng-template #elseTemplate>
+    <div class="alert alert-primary"><p>El mensaje está oculto.</p></div>
+
+  </ng-template>
+~~~
+la propiedad mostrarMensaje se define en `component.ts`
+~~~ js
+export class FormulariosComponent {
+    mostrarMensaje: boolean = true;
+~~~
+## Directiva ngFor 
+1. crear nuevo componente `bucles` e importar `CommonModule`
+~~~ bash
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-bucles',
+  standalone: true,
+  imports: [CommonModule],
+~~~
+2. importa `BuclesComponent` al `app.component.ts` principal
+~~~js 
+import { FormulariosComponent } from './formularios/formularios.component';
+import { BuclesComponent } from './bucles/bucles.component';
+
+@Component({
+selector: 'app-root',
+standalone: true,
+imports: [RouterOutlet , HomeComponent, ContadorComponent,
+  BotonesComponent,FormulariosComponent,BuclesComponent],
+~~~
+3. importar a la vista principal `app.component.ts` ejemplo listar las personas de un array
+- Definir la Interfaz en un nuevo archivo personas en app
+~~~js
+export interface Persona {
+    nombre: string;
+    edad: number;
+}
+~~~
+- Importar la Interfaz en el Componente
+~~~ js
+import { User } from '../../models/user.model'; // Ruta relativa para importar la interfaz
+
+export class UserComponent {
+  user: User;  // Declaración de una variable de tipo User
+~~~
+- Usar la Interfaz en el Componente
+~~~html
+<ul>
+    <li *ngFor="let per of personas; let i= index">
+        <!-- Contenido que se repetirá para cada 'item' en 'items' -->
+       {{'indice: '+i}} {{ 'nombre '+per.nombre }} {{'edad: '+per.edad}}
+
+    </li>
+</ul>
 ~~~
