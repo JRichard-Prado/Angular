@@ -371,3 +371,36 @@ export class UserComponent {
     </li>
 </ul>
 ~~~
+### Ejemplo de ngSwitch:
+1. En el componente TypeScript (component.ts):
+~~~js
+import { CommonModule } from '@angular/common'; // importa el modulo
+@Component({
+  selector: 'app-switch',
+  standalone: true,
+  imports: [CommonModule] // garegar la dependencia
+
+})
+export class SwitchComponent {
+  dia?:string; // variable definida opcional
+}
+~~~
+
+2. En la plantilla HTML (component.html):
+~~~html
+<div>
+    <input type="text" #valor_dia placeholder="ingrese un numero ">
+    <button (click)="dia = valor_dia.value">dia</button>
+</div>
+
+<div [ngSwitch]="dia">
+    <span *ngSwitchCase="'1'">lunes</span>
+    <span *ngSwitchCase="'2'">martes</span>
+    <span *ngSwitchCase="'3'">miercoles</span>
+    <span *ngSwitchCase="'4'">jueves</span>
+    <span *ngSwitchCase="'5'">viernes</span>
+    <span *ngSwitchCase="'6'">sabado</span>
+    <span *ngSwitchCase="'7'">domingo</span>
+    <span *ngSwitchDefault="">Valor por defecto</span>
+</div>
+~~~
