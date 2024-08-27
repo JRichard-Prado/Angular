@@ -404,3 +404,155 @@ export class SwitchComponent {
     <span *ngSwitchDefault="">Valor por defecto</span>
 </div>
 ~~~
+## Formularios basados en plantillas
+1. En el componente TypeScript (component.ts): importar `FormsModule`: Es el módulo que provee las directivas como `ngModel`, `ngForm`, y otros relacionados con la creación y validación de formularios
+~~~ js
+import { FormsModule } from '@angular/forms'; // importar modulos 
+
+@Component({
+  selector: 'app-form-plantilla',
+  standalone: true,
+  imports: [FormsModule], // agregar al array
+ ..
+})
+export class FormPlantillaComponent {
+
+  persona={
+    nombre: 'richard',
+    edad: '44'
+  };
+  procesarFormulario(){ // con este metodo podemos usar API`S O CONECTAR A LA BASE DE DATOS 
+    console.log(this.persona);
+  }
+}
+~~~
+2. En la plantilla HTML (component.html):
+~~~ html
+<div class="card">
+   <div class="card-body">
+       <form (ngSubmit)="procesarFormulario()">
+        <div >
+            <label for="" class="form-label">nombre</label>
+            <input name="nombre" type="text" class="form-control" placeholder="ingrese un nombre" [(ngModel)]="persona.nombre">
+        </div>
+        <div>
+            <label for="" class="form-label"> edad</label>
+            <input name="edad" type="text" class="form-control" placeholder="ingresar edad" [(ngModel)]="persona.edad">
+        </div>
+        <button  class="btn btn-primary mt -2" >enviar a terminal</button>
+
+       </form>
+    </div>
+</div>
+{{persona.nombre }} {{persona.edad}}
+<p>{{ persona | json }}</p> // importar CommonModule al .ts
+~~~
+### Como trabajar con validaciones
+~~~ html
+ <form (ngSubmit)="procesarFormulario()">
+        <div>
+            <label for="" class="form-label">nombre</label>
+            <input name="nombre" type="text" class="form-control" placeholder="ingrese un nombre" 
+            [(ngModel)]="persona.nombre" required="" #nombre = 'ngModel'>
+        </div>
+        <div class="alert alert-danger" [hidden]="nombre.valid || nombre.pristine"> el nombre es obligatorio</div>
+        <div>
+            <label for="" class="form-label"> edad</label>
+            <input name="edad" type="number" class="form-control" placeholder="ingresar edad" 
+            [(ngModel)]="persona.edad" required="" #edad  ='ngModel'>
+        </div>
+        <div class="alert alert-danger mt -2" [hidden]="edad.valid || edad.pristine"> la edad es obligatoria</div>
+        <button  class="btn btn-primary mt -2" >enviar a terminal</button>
+       </form>
+~~~
+- interpolaciones para ver los valores de validacion
+~~~html
+{{nombre.errors | json}} <br>
+{{edad.errors | json}} <br>
+<hr>
+{{nombre.valid | json}} <br>
+{{edad.valid | json}} <br>
+<hr>
+~~~
+### Estados de formularios 
+ propiedad `[disabled]` 
+
+~~~html
+ <form (ngSubmit)="procesarFormulario()">
+        <div>
+            <label for="" class="form-label">nombre</label>
+            <input name="nombre" type="text" class="form-control" placeholder="ingrese un nombre" 
+            [(ngModel)]="persona.nombre" required="" #nombre = 'ngModel'>
+        </div>
+        <div class="alert alert-danger" [hidden]="nombre.valid || nombre.pristine"> el nombre es obligatorio</div>
+        <div>
+            <label for="" class="form-label"> edad</label>
+            <input name="edad" type="number" class="form-control" placeholder="ingresar edad" 
+            [(ngModel)]="persona.edad" required="" #edad  ='ngModel'>
+        </div>
+        <div class="alert alert-danger mt -2" [hidden]="edad.valid || edad.pristine"> la edad es obligatoria</div>
+        <button  class="btn btn-primary mt -2" [disabled]="nombre.invalid || edad.invalid">enviar a terminal</button>
+       </form>
+~~~
+
+utilizando `ngForm` : Es una directiva que crea un objeto `FormGroup`
+~~~ html
+<div class="card">
+   <div class="card-body" >
+       <form (ngSubmit)="procesarFormulario()" #formContact="ngForm">
+        <div>
+            <label for="" class="form-label">nombre</label>
+            <input name="nombre" type="text" class="form-control" placeholder="ingrese un nombre" 
+            [(ngModel)]="persona.nombre" required="" #nombre = 'ngModel'>
+        </div>
+        <div class="alert alert-danger" [hidden]="nombre.valid || nombre.pristine"> el nombre es obligatorio</div>
+        <div>
+            <label for="" class="form-label"> edad</label>
+            <input name="edad" type="number" class="form-control" placeholder="ingresar edad" 
+            [(ngModel)]="persona.edad" required="" #edad  ='ngModel'>
+        </div>
+        <div class="alert alert-danger mt -2" [hidden]="edad.valid || edad.pristine"> la edad es obligatoria</div>
+        <!--button  class="btn btn-primary mt -2" [disabled]="nombre.invalid || edad.invalid">enviar a terminal</button-->
+        <button  class="btn btn-primary mt -2" [disabled]="formContact.invalid">enviar a terminal</button>
+       </form>
+    </div>
+</div>
+{{formContact.valid |json}} <br> 
+{{formContact.invalid}} <hr>
+~~~
+
+## Formularios reactivos (formControl) `ReactiveFormsModule `
+
+gestionar y validar formularios complejos con facilidad,
+* Creación de formularios dinámicos:
+* Validación a nivel de formulario y control
+* Observación de cambios
+* Inmutabilidad
+
+1. sincronizar las propiedades con los input
+* importar `FormControl` es una clase que se usa para manejar el estado de un control de formulario
+~~~js
+import {ReactiveFormsModule, FormControl } from '@angular/forms';
+@Component({
+  selector: 'app-formulario-reactivo',
+  standalone: true,
+  imports: [ ReactiveFormsModule ],  // FormControl no se importa como un módulo.
+  ....
+export class FormularioReactivoComponent {
+  name = new FormControl(''); // para sincronisar la propiedad con los input
+  email = new FormControl('');}
+~~~
+~~~ html
+<form >
+            <div class="mb-2">
+                <label for="" class="form-label">nombre</label>
+                <input [formControl] = 'name' type="text" class="form-control" placeholder="ingrese su nombre">
+            </div>
+            <div class="mb-2">
+                <label for="" class="form-label">email</label>
+                <input [formControl]="email" type="email" class="form-control" placeholder="ingrese su email">
+            </div>
+            <button class="btn btn-primary">enviar</button>
+        </form>
+
+~~~
