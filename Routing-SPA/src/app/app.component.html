@@ -176,8 +176,23 @@
     }
   }
 </style>
+<header>
+  <h1>Angular Router Sample</h1>
+...
+<app-crisis-list></app-crisis-list>
+<app-heroes-list></app-heroes-list>
+<nav>
+  <a class="button" routerLink="/crisis">Crisis Center</a> |
+  <a class="button" routerLink="/heroes">Heroes</a>
+</nav>
+
+
+
+
+</header>
 
 <main class="main">
+  
   <div class="content">
     <div class="left-side">
       <svg
@@ -225,6 +240,7 @@
           <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
         </defs>
       </svg>
+      <router-outlet></router-outlet>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
     </div>
@@ -333,4 +349,4 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<router-outlet />
+

@@ -57,3 +57,30 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+# Aplicación de Página única (SPA) (Router)
+1. Crear un nuevo proyecto Angular ```ng new Routing-SPA```
+2. Crear dos componentes con ```ng g c crisis-list``` y ```ng g c heroes-list```
+3. Definición de ruta 
+```bash
+{path: 'crisis-list', component: CrisisListComponent},
+{path: 'heroes-list', component: HeroesListComponent}
+```
+4. Importar ````provideRouter```` esta función de proveedor de ```@angular/router``` del archivo ```app.config.ts``` .
+5. Actualice su componente con ```router-outlet```
+```html
+<app-crisis-list></app-crisis-list>
+<app-heroes-list></app-heroes-list>
+```
+```html
+<router-outlet></router-outlet>
+```
+6. Añadir ```RouterOutlet``` de las importaciones en ```app.component.ts```
+7. Agregar dos enlaces, que los usuarios pueden hacer clic para navegar entre la ```heroes-list``` y ```crisis-list```
+```html
+<nav>
+  <a class="button" routerLink="/crisis-list">Crisis Center</a> |
+  <a class="button" routerLink="/heroes-list">Heroes</a>
+</nav>
+```
