@@ -28,9 +28,9 @@
             ],
             "styles": [
               "src/styles.css",
-              "Paginas-Web/Arte-Pintura/node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": ["Paginas-Web/Arte-Pintura/node_modules/bootstrap/dist/js/bootstrap.min.js"],
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -98,5 +98,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
