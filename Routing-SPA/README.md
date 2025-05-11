@@ -60,15 +60,17 @@ For more information on using the Angular CLI, including detailed command refere
 
 
 # Aplicación de Página única (SPA) (Router)
-1. Crear un nuevo proyecto Angular ```ng new Routing-SPA```
+1. Crear un nuevo proyecto Angular ```ng new Routing-SPA``` 
+   
+   > Cuando se le pide con ```Would you like to add Angular routing?```, seleccione __N__.
 2. Crear dos componentes con ```ng g c crisis-list``` y ```ng g c heroes-list```
-3. Definición de ruta 
+3. Definición de rutas en archivo ```app.routes.ts``` .
 ```bash
 {path: 'crisis-list', component: CrisisListComponent},
 {path: 'heroes-list', component: HeroesListComponent}
 ```
-4. Importar ````provideRouter```` esta función de proveedor de ```@angular/router``` del archivo ```app.config.ts``` .
-5. Actualice su componente con ```router-outlet```
+4. Verificar importacion de ````provideRouter````, esta función de proveedor de ```@angular/router``` del archivo ```app.config.ts``` .
+5. Actualice su componente con la directiva```router-outlet```
 ```html
 <app-crisis-list></app-crisis-list>
 <app-heroes-list></app-heroes-list>
@@ -77,10 +79,24 @@ For more information on using the Angular CLI, including detailed command refere
 <router-outlet></router-outlet>
 ```
 6. Añadir ```RouterOutlet``` de las importaciones en ```app.component.ts```
-7. Agregar dos enlaces, que los usuarios pueden hacer clic para navegar entre la ```heroes-list``` y ```crisis-list```
+7. Agregar dos enlaces en plantilla, los usuarios pueden hacer clic para navegar entre la ```heroes-list``` , ```crisis-list``` y directiva ```RouterLink``` en lista de importaciones de  ```app.component.ts```
 ```html
 <nav>
   <a class="button" routerLink="/crisis-list">Crisis Center</a> |
   <a class="button" routerLink="/heroes-list">Heroes</a>
 </nav>
+```
+![navegacion](/Routing-SPA/public/img/nav.PNG)
+
+8. Añadiendo la Directiva ```routerLinkActive``` , usted informa su solicitud de aplicar una clase CSS específica a la ruta activa. En este tutorial, esa clase CSS es ```activebutton``` Pero podrías usar cualquier clase que quieras.
+   
+![css](/Routing-SPA/public/img/nav1.PNG)
+
+9. Añadir una ruta que __redirige__ al usuario, actualizar ```router``` en ```app.routes.ts```
+  ```javascript
+  {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},
+  ```
+10. Ruta comodín __**__ (usuario intente acceder a una ruta que no ha definido)
+```javascript
+{path: '**', component: PageNotFoundComponent} 
 ```
